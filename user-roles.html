@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Add User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+</head>
+<body>
+<div class="container my-5">
+    <h3> User Roles</h3>
+    <div class="card">
+        <div class="card-body">
+            <div th:switch="${users}" class="container my-5">
+
+               <!-- <div class="col-md-10">-->
+
+                    <div th:case="*">
+                        <table class="table table-striped table-responsive-md">
+                            <thead>
+                            <tr>
+                                <th>UserPid</th>
+                                <th>UserRole</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.userPid}"></td>
+                                <td th:text="${user.userRole}"></td>
+                                <td><a
+                                        th:href="@{/users/{id}(id=${user.id})}"
+                                        class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+               <!-- </div>-->
+            </div>
+            <div class="col-md-10">
+               <!-- <form action="#" th:action="@{/users/{userPid}}"
+                      th:object="${users}" method="post" id="search-form">-->
+                <form action="#" th:action="@{/users}"
+                      th:object="${roles}" method="post" id="search-form">
+
+                       <!-- <label>search pid: </label>-->
+                        <!--<input type="text" name="userPid" th:field="*{users.userPid}">-->
+                        <!--<input type="text" name="userPid" >
+                        <input type="submit" value="Search">-->
+
+                       <!-- <select th:field="*{userRole}">-->
+                        <label class="col-sm-2 control-label">UserPid</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="userPid" id="userPid"/>
+                            <button type="submit" id="bth-search"
+                                    class="btn btn-primary btn-lg">Search
+                            </button>
+
+<!--
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+
+                        </div>
+                    </div>
+-->
+
+
+                        <select id ="userRole" name="userRole" >
+                            <option  th:each="userRole : ${roles}"
+                            th:value="${userRole}"
+                            th:utext="${userRole}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-primary" value="Save">
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="webjars/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript" src="js/main.js"></script>
+
+</body>
+</html>
